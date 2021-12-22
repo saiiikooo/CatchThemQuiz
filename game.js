@@ -1,5 +1,5 @@
 const question = document.querySelector('#question');
-const choices = Array.from(document.querySelectorALL('.choice-text));
+const choices = Array.from(document.querySelectorAll('.choice-text'));
 const progressText = document.querySelector('#progressText');
 const scoreText = document.querySelector('#score');
 const progressBarFull = document.querySelector('#progressBarFull');
@@ -8,20 +8,20 @@ const progressBarFull = document.querySelector('#progressBarFull');
 let currentQuestion = {}
 let acceptingAnswers = true
 let score = 0
-let quetionsCounter = 0
+let questionCounter = 0
 let availableQuestions = []
 
 let questions = [
     {
-        questions: 'What is 3 x 5?',
+        question: 'What is 3 x 5?',
         choice1: '2',
         choice2: '18',
         choice3: '15',
         choice4: '28',
         answer: 3,
-    }
+    },
     {
-        questions: 'What is the fastest mammmal in the world?',
+        question: 'What is the fastest mammmal in the world?',
         choice1: 'Cheetah',
         choice2: 'Kangaroo',
         choice3: 'Elephant',
@@ -29,7 +29,7 @@ let questions = [
         answer: 1,
     },
     {
-        questions: 'Whats the deepest ocean in the world?',
+        question: 'Whats the deepest ocean in the world?',
         choice1: 'Western Pacific Ocean',
         choice2: 'Indian Ocean',
         choice3: 'Southern Ocean',
@@ -37,7 +37,7 @@ let questions = [
         answer: 1,
     },
     {
-        questions: 'The tallest buidling in the world is located in which city?',
+        question: 'The tallest buidling in the world is located in which city?',
         choice1: 'Shanghai',
         choice2: 'New York',
         choice3: 'Dubai',
@@ -45,7 +45,7 @@ let questions = [
         answer: 3,
     },
     {
-        questions: 'What is the fastest car in the world?',
+        question: 'What is the fastest car in the world?',
         choice1: 'Mclaren Speedtail',
         choice2: 'Bugatti Chiron supper',
         choice3: 'SSC Tuatara',
@@ -53,7 +53,7 @@ let questions = [
         answer: 3,
     },
     {
-        questions: 'What is the melting point of Iron?',
+        question: 'What is the melting point of Iron?',
         choice1: '213c',
         choice2: '1223c',
         choice3: '784c',
@@ -61,7 +61,7 @@ let questions = [
         answer: 4,
     },
     {
-        questions: 'What is 3 x 10?',
+        question: 'What is 3 x 10?',
         choice1: '2',
         choice2: '18',
         choice3: '21',
@@ -74,21 +74,22 @@ const SCORE_POINTS = 100
 const MAX_QUESTIONS = 7
 
 startGame = () => {
-    questionsCounter = 0
+    questionCounter = 0
     score = 0
     availableQuestions = [...questions]
     getNewQuestion()
 }
 
 getNewQuestion = () => {
-    if(availableQuestions.length === || questionsCounter > MAX_QUESTIONS) {
+    if(availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
         localStorage.setItem('mostRecentScore', score)
+
         return window.location.assign('/end.html')
 
     }
-    questionsCounter++
-    progressText.innerText = 'Question ${questionCounter} of ${MAX_QUESTIONS}'
-    progressBarFull.style.width = '${(questionCounter/MAX_QUESTIONS) * 100}%'
+    questionCounter++
+    progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`
+    progressBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) * 100}%`
 
     const questionIndex = Math.floor(Math.random() *availableQuestions.length)
     currentQuestion = availableQuestions[questionIndex]
@@ -96,10 +97,42 @@ getNewQuestion = () => {
 
     choices.forEach(choice => {
         const number = choice.dataset['number']
-        choice.innerText =currentQuestion['choice' + number]
+        choice.innerText = currentQuestion['choice' + number]
     })
 
     availableQuestions.splice(questionIndex, 1)
 
     acceptingAnswers = true
 }
+
+choices.forEach (choice => {
+    choice.addEventListener('click', e => {
+        if(!acceptingAnswers) return
+
+        acceptingAnswers = false
+        const selectedChoice = e.target
+        const selectedAnswer = selectedChoice.dataset['number']
+
+        let classToApply = selectedAnswer == currentQuestion.answer ? 'correct' :
+        'incorrect'
+
+        if(classToApply === 'correct') {
+            incrementScore(SCORE_POINTS)
+        }
+
+        selectedChoice.parentElement.classList.add(classToApply)
+
+        setTimeout(() => {
+            selectedChoice.parentElement.classList.remove(classToApply)
+            getNewQuestion()
+
+        }, 1000)
+    })
+})
+
+incrementScore = num => {
+    score +=num
+    scoreText.innerText = score
+}
+
+startGame()
