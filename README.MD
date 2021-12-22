@@ -8,7 +8,7 @@ Hi, this project is about making our employees to better themselves and to impro
 
 ## Review
 
-The URL of application: [Website](https://saiiikooo.github.io/CatchThemQuiz/Index.html
+The URL of application: [Website](https://saiiikooo.github.io/CatchThemQuiz/Index.html)
 
 The URL of the GitHub repository. [Github](https://github.com/saiiikooo)
 
