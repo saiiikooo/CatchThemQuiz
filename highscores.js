@@ -1,7 +1,8 @@
-const highScoreList = documnet.querySelector ('#highScoreList')
+const highScoresList = document.querySelector('#highScoresList')
 const highScores = JSON.parse(localStorage.getItem('highScores')) || []
 
-highScoreList.innerHTMl = 
+highScoresList.innerHTMl = 
 highScores.map(score => {
     return `<li class="high-score">${score.name} - ${score.score}</li>`
 }).join('')
+
