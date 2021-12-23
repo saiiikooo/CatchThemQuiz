@@ -13,13 +13,13 @@
     font-size: 62.5%;
     font-family: 'Nova Square', cursive;
 }
-
+/* to to syle your specific header or chosen ID or tags to be personilised */
 h1 {
     font-size: 5.4rem;
     color: seashell;
     margin-bottom: 5rem;
 }
-
+/* Allow to change your shapes and sizes for your chosen container or id Tags */
 .container {
     width: 100vw;
     height: 100vh;
@@ -44,7 +44,7 @@ h1 {
 .jusitfy-center {
     justify-content: center;
 }
-
+/* to align your text to center or any chosen ID tags  */
 .text-center {
     text-align: center;
 }

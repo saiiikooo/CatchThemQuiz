@@ -13,6 +13,17 @@ The URL of application: [Website](https://saiiikooo.github.io/CatchThemQuiz/Inde
 The URL of the GitHub repository. [Github](https://github.com/saiiikooo)
 
 
+## Images and Screenshots
+
+<img src="images/front.png" width="100">
+<img src="images/wrong.png" width="100">
+<img src="images/right.png" width="100">
+<img src="images/questions.png" width="100">
+
+
+
 ## Contact Info
 Email: cyrus.dato410@gmail.com
 Phone: xxx xxx 923
+
+
